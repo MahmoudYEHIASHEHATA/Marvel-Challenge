@@ -2,6 +2,7 @@ package com.extreme.marvelchallenge.presentation.ui.main
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Menu
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupWithNavController
@@ -48,5 +49,10 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>(
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
     }
 }

@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">Marvel Challenge</string>
 
+    <!--Menu title-->
+    <string name="search">Search</string>
 
-    <!--    ImageView Content Description-->
+    <!--ImageView Content Description-->
     <string name="content_des_splash_iv">Splash background image view</string>
     <string name="content_des_splash_logo">Marvel logo splash</string>
+    <string name="content_des_toolbar_logo">Toolbar logo</string>
+    <string name="content_des_character_image">Character Image For present marvel character image</string>
+    <string name="txt_ex_character_name">Marvel</string>
 </resources>
