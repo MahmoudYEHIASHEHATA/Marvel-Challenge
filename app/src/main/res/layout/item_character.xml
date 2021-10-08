@@ -7,6 +7,9 @@
         android:id="@+id/la_character_crd"
         android:layout_width="match_parent"
         android:layout_height="164dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
         app:cardCornerRadius="25dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,7 +36,7 @@
                     android:id="@+id/view"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:alpha=".5"
+                    android:alpha=".6"
                     android:background="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
