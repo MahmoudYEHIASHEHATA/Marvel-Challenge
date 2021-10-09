@@ -5,7 +5,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.extreme.marvelchallenge.R
-import com.extreme.marvelchallenge.domain.model.CharacterItem
+import com.extreme.marvelchallenge.data.models.domain.CharacterItem
 import com.extreme.marvelchallenge.presentation.ui.home.adapter.CharactersCellAdapter
 
 /**
@@ -35,7 +35,7 @@ fun ImageView.loadImageFromPathByGlide(
     path: String,
     extension: String
 ) {
-    val imageUri = "$path${Constants.NetworkService.IMAGE_VARIANT_NAME}$extension"
+    val imageUri = "$path/${Constants.NetworkService.IMAGE_VARIANT_NAME}.$extension"
 
     Glide.with(context)
         .load(imageUri)

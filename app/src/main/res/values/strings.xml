@@ -13,4 +13,8 @@
     <string name="content_des_toolbar_logo">Toolbar logo</string>
     <string name="content_des_character_image">Character Image For present marvel character image</string>
     <string name="txt_ex_character_name">Marvel</string>
+    <string name="start_typing">Search for character..</string>
+
+    <!-- Buttons -->
+    <string name="txt_cancel_search">Cancel</string>
 </resources>

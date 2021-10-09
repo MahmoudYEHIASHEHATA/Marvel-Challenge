@@ -1,8 +1,8 @@
 package com.extreme.marvelchallenge.presentation.ui.home
 
 import com.extreme.marvelchallenge.R
+import com.extreme.marvelchallenge.data.apiService.Status
 import com.extreme.marvelchallenge.databinding.FragmentHomeBinding
-import com.extreme.marvelchallenge.domain.model.CharacterItem
 import com.extreme.marvelchallenge.presentation.core.BaseFragment
 import com.extreme.marvelchallenge.presentation.ui.home.adapter.CharactersCellAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,15 +16,35 @@ class HomeFragment : BaseFragment<HomeFragmentViewModel, FragmentHomeBinding>(
     R.layout.fragment_home,
     HomeFragmentViewModel::class.java,
 ) {
+   lateinit var adapter: CharactersCellAdapter
     override fun init() {
         super.init()
+        observeCharactersApi()
+        setupCharactersCellAdapter()
     }
 
-    private fun setupCharactersCellAdapter(list: List<CharacterItem>) {
-        val adapter = CharactersCellAdapter{
+    private fun setupCharactersCellAdapter() {
+         adapter = CharactersCellAdapter {
 
         }
         binding.recyclerCharacters.adapter = adapter
-        (binding.recyclerCharacters.adapter as CharactersCellAdapter).submitList(list)
+    }
+
+    private fun observeCharactersApi() {
+        viewModel.characterApiWrapper.observe(viewLifecycleOwner, { Resource ->
+            Resource?.let {
+                when (Resource.status) {
+                    Status.ERROR -> {
+
+                    }
+                    Status.LOADING -> {
+
+                    }
+                    Status.SUCCESS -> {
+
+                    }
+                }
+            }
+        })
     }
 }

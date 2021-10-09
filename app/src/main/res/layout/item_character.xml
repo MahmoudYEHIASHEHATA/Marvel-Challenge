@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.extreme.marvelchallenge.presentation.ui.home.adapter.CharacterItemViewModel" />
+            name="item"
+            type="com.extreme.marvelchallenge.data.models.domain.CharacterItem" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -25,8 +25,8 @@
 
             <ImageView
                 android:id="@+id/character_img_iv"
-                extension="@{viewModel.item.thumbnail.extension}"
-                imagePath="@{viewModel.item.thumbnail.path}"
+                extension="@{item.thumbnail.extension}"
+                imagePath="@{item.thumbnail.path}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/content_des_character_image"
@@ -57,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
-                    android:text="@{viewModel.item.name}"
+                    android:text="@{item.name}"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
