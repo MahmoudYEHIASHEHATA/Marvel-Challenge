@@ -1,8 +1,37 @@
 <resources>
     <string name="app_name">Marvel Challenge</string>
 
+    <!--Static words-->
+    <string name="position" translatable="false">position</string>
+    <string name="txt_ex_character_name" translatable="false">Marvel</string>
 
-    <!--    ImageView Content Description-->
+    <!--Menu title-->
+    <string name="search">Search</string>
+
+    <!--ImageView Content Description-->
     <string name="content_des_splash_iv">Splash background image view</string>
     <string name="content_des_splash_logo">Marvel logo splash</string>
+    <string name="content_des_toolbar_logo">Toolbar logo</string>
+    <string name="content_des_character_image">Character Image For present marvel character image</string>
+    <string name="content_des_character_details_image">Character Details image</string>
+    <string name="content_des_character_back_image">Character Details back image</string>
+
+    <!-- Hint Text -->
+    <string name="start_typing">Search for character..</string>
+
+
+    <string name="txt_cancel_search">Cancel</string>
+
+    <string name="txt_comics_title">Comics</string>
+    <string name="txt_series_title">Series</string>
+    <string name="txt_stories_title">Stories</string>
+    <string name="txt_events_title">Events</string>
+    <string name="txt_description_title">Description</string>
+
+
+    <!-- Validation -->
+    <string name="no_network">Network Not Available</string>
+    <string name="txt_no_content">Sorry no content available</string>
+    <string name="content_desc_search_image">Search image</string>
+
 </resources>
