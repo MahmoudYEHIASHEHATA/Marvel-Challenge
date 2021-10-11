@@ -8,5 +8,6 @@ package com.extreme.marvelchallenge.data.models
 data class GeneralApiResponse<T>(
     val code: Int,
     val status: String,
+    val message: String,
     val data: T
 )

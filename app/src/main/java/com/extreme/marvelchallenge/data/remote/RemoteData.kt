@@ -1,14 +1,19 @@
 package com.extreme.marvelchallenge.data.remote
 
+import android.content.Context
+import android.util.Log
+import com.extreme.marvelchallenge.R
 import com.extreme.marvelchallenge.data.apiService.*
 import com.extreme.marvelchallenge.data.models.GeneralApiResponse
-import com.extreme.marvelchallenge.data.shared.AppNetworkManager
-import retrofit2.Response
 import com.extreme.marvelchallenge.data.models.network.character.CharactersResponse
-import com.extreme.marvelchallenge.data.models.network.comics.ComicsModel
-import com.extreme.marvelchallenge.data.models.network.events.EventsModel
-import com.extreme.marvelchallenge.data.models.network.series.SeriesModel
-import com.extreme.marvelchallenge.data.models.network.stories.StoriesModel
+import com.extreme.marvelchallenge.data.models.network.comics.ComicsResponse
+import com.extreme.marvelchallenge.data.models.network.events.EventsResponse
+import com.extreme.marvelchallenge.data.models.network.series.SeriesResponse
+import com.extreme.marvelchallenge.data.models.network.stories.StoriesResponse
+import com.extreme.marvelchallenge.data.shared.AppNetworkManager
+import com.google.gson.Gson
+import dagger.hilt.android.qualifiers.ApplicationContext
+import retrofit2.Response
 import javax.inject.Inject
 
 /**
@@ -18,30 +23,32 @@ import javax.inject.Inject
 class RemoteData @Inject constructor(
     private val apiService: ApiService,
     private val appNetworkManager: AppNetworkManager,
+    @ApplicationContext private val context: Context
 ) : RemoteDataSource {
 
     override suspend fun getAllCharacters(offset: Int): Resource<CharactersResponse> {
-       return processCall { apiService.allCharacters(offset) }
-
+        return processCall { apiService.allCharacters(offset) }
     }
 
-    override suspend fun searchOnCharacter(name: String): Resource<CharactersResponse> {
+    override suspend fun searchOnCharacter(
+        name: String
+    ): Resource<CharactersResponse> {
         return processCall { apiService.searchOnCharacter(name) }
     }
 
-    override suspend fun getComics(characterId: Int): Resource<ComicsModel> {
+    override suspend fun getComics(characterId: Int): Resource<ComicsResponse> {
         return processCall { apiService.getComics(characterId) }
     }
 
-    override suspend fun getEvents(characterId: Int): Resource<EventsModel> {
+    override suspend fun getEvents(characterId: Int): Resource<EventsResponse> {
         return processCall { apiService.getEvents(characterId) }
     }
 
-    override suspend fun getSeries(characterId: Int): Resource<SeriesModel> {
+    override suspend fun getSeries(characterId: Int): Resource<SeriesResponse> {
         return processCall { apiService.getSeries(characterId) }
     }
 
-    override suspend fun getStories(characterId: Int): Resource<StoriesModel> {
+    override suspend fun getStories(characterId: Int): Resource<StoriesResponse> {
         return processCall { apiService.getStories(characterId) }
     }
 
@@ -52,13 +59,10 @@ class RemoteData @Inject constructor(
             return Resource.Failure(
                 Error(
                     code = ResponseCode.NETWORK_NOT_AVAILABLE.value,
-                    msg = null
+                    message = context.getString(R.string.no_network)
                 )
-
             )
         }
-
-
         return try {
             val response = requestCall.invoke()
 
@@ -67,24 +71,27 @@ class RemoteData @Inject constructor(
                     Resource.Success(response.body()!!.data)
                 }
                 else -> {
-                    return Resource.Failure(
-                        Error(
-                            code = ResponseCode.NETWORK_NOT_AVAILABLE.value,
-                            msg = null
+                    val error = try {
+                        val errorResponse = Gson().fromJson(
+                            response.errorBody()?.charStream(),
+                            GeneralErrorResponse::class.java
                         )
-                    )
+                        errorResponse.message?.let { Log.d("message", it) }
+                        Error(code = response.code(), message = errorResponse.message)
+                    } catch (e: RuntimeException) {
+                        Error(code = response.code())
+                    }
 
+                    return Resource.Failure(error)
                 }
             }
         } catch (t: Throwable) {
             Resource.Failure(
                 Error(
                     code = ResponseCode.NETWORK_ERROR.value,
-                    msg = t.message.toString()
+                    message = t.message.toString()
                 )
             )
         }
-
-
     }
 }

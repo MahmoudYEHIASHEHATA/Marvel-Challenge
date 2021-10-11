@@ -2,10 +2,10 @@ package com.extreme.marvelchallenge.data.apiService
 
 import com.extreme.marvelchallenge.data.models.GeneralApiResponse
 import com.extreme.marvelchallenge.data.models.network.character.CharactersResponse
-import com.extreme.marvelchallenge.data.models.network.comics.ComicsModel
-import com.extreme.marvelchallenge.data.models.network.events.EventsModel
-import com.extreme.marvelchallenge.data.models.network.series.SeriesModel
-import com.extreme.marvelchallenge.data.models.network.stories.StoriesModel
+import com.extreme.marvelchallenge.data.models.network.comics.ComicsResponse
+import com.extreme.marvelchallenge.data.models.network.events.EventsResponse
+import com.extreme.marvelchallenge.data.models.network.series.SeriesResponse
+import com.extreme.marvelchallenge.data.models.network.stories.StoriesResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -21,17 +21,18 @@ interface ApiService {
     suspend fun allCharacters(@Query("offset") offset: Int): Response<GeneralApiResponse<CharactersResponse>>
 
     @GET("characters")
-    suspend fun searchOnCharacter(@Query("name") name: String? = null): Response<GeneralApiResponse<CharactersResponse>>
+    suspend fun searchOnCharacter(@Query("nameStartsWith") name: String? = null)
+            : Response<GeneralApiResponse<CharactersResponse>>
 
     @GET("characters/{characterId}/comics")
-    suspend fun getComics(@Path("characterId") characterId: Int): Response<GeneralApiResponse<ComicsModel>>
+    suspend fun getComics(@Path("characterId") characterId: Int): Response<GeneralApiResponse<ComicsResponse>>
 
     @GET("characters/{characterId}/events")
-    suspend fun getEvents(@Path("characterId") characterId: Int): Response<GeneralApiResponse<EventsModel>>
+    suspend fun getEvents(@Path("characterId") characterId: Int): Response<GeneralApiResponse<EventsResponse>>
 
     @GET("characters/{characterId}/stories")
-    suspend fun getStories(@Path("characterId") characterId: Int): Response<GeneralApiResponse<StoriesModel>>
+    suspend fun getStories(@Path("characterId") characterId: Int): Response<GeneralApiResponse<StoriesResponse>>
 
     @GET("characters/{characterId}/series")
-    suspend fun getSeries(@Path("characterId") characterId: Int): Response<GeneralApiResponse<SeriesModel>>
+    suspend fun getSeries(@Path("characterId") characterId: Int): Response<GeneralApiResponse<SeriesResponse>>
 }

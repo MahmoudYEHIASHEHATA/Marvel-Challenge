@@ -1,6 +1,6 @@
 package com.extreme.marvelchallenge.data.models.domain
 
-import com.extreme.marvelchallenge.data.models.network.character.Thumbnail
+import com.extreme.marvelchallenge.data.models.network.Thumbnail
 
 /**
  * @author Mahmoud Shehatah

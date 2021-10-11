@@ -2,10 +2,10 @@ package com.extreme.marvelchallenge.data.remote
 
 import com.extreme.marvelchallenge.data.apiService.Resource
 import com.extreme.marvelchallenge.data.models.network.character.CharactersResponse
-import com.extreme.marvelchallenge.data.models.network.comics.ComicsModel
-import com.extreme.marvelchallenge.data.models.network.events.EventsModel
-import com.extreme.marvelchallenge.data.models.network.series.SeriesModel
-import com.extreme.marvelchallenge.data.models.network.stories.StoriesModel
+import com.extreme.marvelchallenge.data.models.network.comics.ComicsResponse
+import com.extreme.marvelchallenge.data.models.network.events.EventsResponse
+import com.extreme.marvelchallenge.data.models.network.series.SeriesResponse
+import com.extreme.marvelchallenge.data.models.network.stories.StoriesResponse
 
 /**
  * @author Mahmoud Shehatah
@@ -15,8 +15,8 @@ interface RemoteDataSource {
 
     suspend fun getAllCharacters(offset: Int): Resource<CharactersResponse>
     suspend fun searchOnCharacter(name: String): Resource<CharactersResponse>
-    suspend fun getComics(characterId: Int): Resource<ComicsModel>
-    suspend fun getEvents(characterId: Int): Resource<EventsModel>
-    suspend fun getSeries(characterId: Int): Resource<SeriesModel>
-    suspend fun getStories(characterId: Int): Resource<StoriesModel>
+    suspend fun getComics(characterId: Int): Resource<ComicsResponse>
+    suspend fun getEvents(characterId: Int): Resource<EventsResponse>
+    suspend fun getSeries(characterId: Int): Resource<SeriesResponse>
+    suspend fun getStories(characterId: Int): Resource<StoriesResponse>
 }

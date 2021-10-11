@@ -1,5 +1,8 @@
 package com.extreme.marvelchallenge.data.models.network.character
 
+import com.extreme.marvelchallenge.data.models.network.Thumbnail
+import com.extreme.marvelchallenge.data.models.network.Url
+
 
 data class CharactersModel(
     val comics: Comics,

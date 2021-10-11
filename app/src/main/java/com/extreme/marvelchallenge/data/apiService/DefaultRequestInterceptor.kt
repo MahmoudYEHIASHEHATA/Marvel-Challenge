@@ -21,7 +21,8 @@ class DefaultRequestInterceptor @Inject constructor() : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val ts =
-            (Calendar.getInstance(TimeZone.getTimeZone("UTC")).timeInMillis / Constants.StanderValues.TIME_ZONE_UNIT).toString()
+            (Calendar.getInstance(TimeZone.getTimeZone("UTC")).timeInMillis
+                    / Constants.StanderValues.TIME_ZONE_UNIT).toString()
         val url = chain.request().url
             .newBuilder()
             .addQueryParameter(

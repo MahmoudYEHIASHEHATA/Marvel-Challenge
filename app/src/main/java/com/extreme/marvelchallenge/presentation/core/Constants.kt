@@ -7,14 +7,16 @@ package com.extreme.marvelchallenge.presentation.core
 object Constants {
 
     object NetworkService {
-        const val IMAGE_VARIANT_NAME = "portrait_uncanny"
         const val BASE_URL = " https://gateway.marvel.com:443/v1/public/"
         const val API_KEY_NAME = "apikey"
         const val API_KEY_VALUE = "66a0fe8bb1038e6836fd37db7b65fbcb"
         const val PRIVATE_KEY_VALUE = "0551bdfcdf3f89bbf066474523e40e8b1651c6c9"
         const val API_TS_NAME = "ts"
         const val API_HASH_NAME = "hash"
-        const val FIRST_PAGE=0
+        const val FIRST_PAGE = 0
+        const val START_TOTAL = 0
+        const val IMAGE_VARIANT_NAME = "landscape_incredible"
+        const val DELAY_TIME_FOR_SEARCH = 300L
     }
 
     object Splash {

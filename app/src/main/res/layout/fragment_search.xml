@@ -3,6 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isLoading"
+            type="Boolean" />
+
+        <variable
+            name="viewModel"
+            type="com.extreme.marvelchallenge.presentation.ui.search.SearchFragmentViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rootView"
         android:layout_width="match_parent"
@@ -14,20 +27,47 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:backgroundTint="@color/black_700"
             app:cardCornerRadius="15dp"
             app:cardElevation="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent=".7">
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_view"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/black_700"
-                android:inputType="text"
-                app:defaultQueryHint="@string/start_typing"
-                app:searchIcon="@drawable/ic_search" />
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/search_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/content_desc_search_image"
+                    android:padding="10dp"
+                    android:scaleType="center"
+                    app:layout_constraintBottom_toBottomOf="@+id/search_et"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/search_et"
+                    app:srcCompat="@drawable/ic_search_white" />
+
+                <EditText
+                    android:id="@+id/search_et"
+                    android:layout_width="0dp"
+                    android:layout_height="64dp"
+                    android:autofillHints="@string/start_typing"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/start_typing"
+                    android:inputType="text"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="@={viewModel.searchTextLivData}"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/search_iv"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <Button
@@ -48,10 +88,14 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerCharacters"
+            searchResultListItems="@{viewModel.charactersRequestLiveData}"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
             android:orientation="vertical"
+            android:paddingBottom="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,5 +104,19 @@
             app:spanCount="2"
             tools:itemCount="100"
             tools:listitem="@layout/item_search" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/white"
+            android:padding="5dp"
+            android:visibility="@{isLoading?View.VISIBLE:View.GONE,default=gone}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

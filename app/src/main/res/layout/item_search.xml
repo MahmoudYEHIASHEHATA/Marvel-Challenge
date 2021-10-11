@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="searchText"
+            type="String" />
+
+        <variable
             name="item"
             type="com.extreme.marvelchallenge.data.models.domain.CharacterItem" />
     </data>
@@ -14,15 +18,14 @@
         android:id="@+id/rootView"
         android:layout_width="match_parent"
         android:layout_height="94dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/black_700"
         app:cardCornerRadius="25dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black_700">
+            android:background="@android:color/transparent">
 
             <ImageView
                 android:id="@+id/character_img_iv"
@@ -40,15 +43,19 @@
 
             <TextView
                 android:id="@+id/character_name_tv"
+                originName="@{item.name}"
+                searchText="@{searchText}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:fontFamily="sans-serif"
-                android:text="@{item.name,default=`Marvel`}"
+                android:maxLines="1"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@+id/character_img_iv"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
